@@ -1,0 +1,60 @@
+.ec-mypageRole {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #2a2a2a;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+}
+.ec-navlistRole {
+    position: relative;
+    border-bottom: 2px solid #aaa;
+    margin: 16px 0;
+    height: 30px;
+    padding: 8px 8px 10px;
+}
+.ec-navlistRole .ec-navlistRole__navlist {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+.ec-navlistRole .ec-navlistRole__item {
+    min-width: auto;
+    min-height: auto;
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #aaa;
+    text-align: center;
+    margin-right: 8px;
+}
+.ec-navlistRole .active {
+    border-top: 1px solid #bb000f;
+    border-right: 1px solid #bb000f;
+    border-left: 1px solid #bb000f;
+}
+@media only screen and (min-width: 768px)
+{
+.ec-mypageRole {
+    padding: 0;
+    margin-bottom: 32px;
+}
+.ec-navlistRole {
+    height: 40px;
+    padding: 0;
+    margin-bottom: 16px;
+}
+.ec-navlistRole .ec-navlistRole__navlist {
+    justify-content: center;
+}
+
+}
