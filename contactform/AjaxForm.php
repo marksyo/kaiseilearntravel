@@ -93,6 +93,12 @@ const HANDLER_MSG = [
     '
 ];
 
+// 在常量定义区添加
+const ADMIN_EMAIL = 'markshou@gmail.com';
+const SECOND_EMAIL = 'yanyanli302@gmail.com';
+
+
+
 # Check if request is Ajax request
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest') {
     statusHandler(true, HANDLER_MSG['ajax_only']);
@@ -165,8 +171,13 @@ if ($resp->isSuccess()) {
         // $mail->addReplyTo(USERNAME, 'Information');
 
         // 修改收件人设置（重要！）
-        $mail->setFrom(USERNAME, 'Website Contact Form');  // 发件人必须与SMTP用户一致
-        $mail->addAddress(USERNAME, 'Admin');             // 主收件人改为管理员邮箱
+        $mail->setFrom(USERNAME, 'Web Contact Form');  // 发件人必须与SMTP用户一致
+        // $mail->addAddress(USERNAME, 'Admin');             // 主收件人改为管理员邮箱
+       
+        // 修改收件人配置
+        $mail->addAddress(ADMIN_EMAIL, 'Xiao');
+        $mail->addAddress(SECOND_EMAIL, 'Yan');
+
         $mail->clearReplyTos();                           // 移除默认回复地址
         $mail->addReplyTo($email, $name);                 // 设置用户邮箱为回复地址
 
