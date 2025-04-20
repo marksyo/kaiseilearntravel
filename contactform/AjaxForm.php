@@ -145,7 +145,7 @@ log_message("Form submitted from: $source_url");
 # Verifying the user's response
 $recaptcha = new \ReCaptcha\ReCaptcha(SECRET_KEY);
 $resp = $recaptcha
-    ->setExpectedHostname($_SERVER['SERVER_NAME'])
+    // ->setExpectedHostname($_SERVER['SERVER_NAME']) //front host=kaiseilearntravel.onrender.com, backend host=kaiseiweb.onrender.com. this cause hostname mismatch
     ->verify($token, filter_var($ip, FILTER_VALIDATE_IP));
 
 if ($resp->isSuccess()) {
