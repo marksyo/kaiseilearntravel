@@ -50,7 +50,7 @@ function setupFormValidation() {
                 const formData = new FormData(form);
                 
                 // 发送请求
-                const response = await fetch('https://contactphp.ct.ws/AjaxForm.php', {
+                const response = await fetch('./AjaxForm.php', {
                     method: 'POST',
                     mode: 'cors',
                     credentials: 'omit',

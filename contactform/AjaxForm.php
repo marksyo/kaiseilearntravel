@@ -104,13 +104,14 @@ $ip = $_SERVER['HTTP_X_FORWARDED_FOR']
 ?? $_SERVER['REMOTE_ADDR'];
 
 # Check if fields has been entered and valid
+$date    = new DateTime();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = secure($_POST['name']) ?? statusHandler(true, HANDLER_MSG['enter_name']);
     $email   = filter_var(secure($_POST['email']), FILTER_SANITIZE_EMAIL) ?? statusHandler(true, HANDLER_MSG['enter_email']);
     $message = secure($_POST['message']) ?? statusHandler(true, HANDLER_MSG['enter_message']);
     $token   = secure($_POST['recaptcha-token']) ?? statusHandler(true, HANDLER_MSG['token-error']);
     $ip      = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'];
-    $date    = new DateTime();
+    // $date    = new DateTime();
 
     // 新增来源URL获取
     $source_url = filter_var(
