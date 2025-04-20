@@ -50,7 +50,7 @@ function setupFormValidation() {
                 const formData = new FormData(form);
                 
                 // 发送请求
-                const response = await fetch('./AjaxForm.php', {
+                const response = await fetch('https://kaiseiweb.onrender.com/contactform/AjaxForm.php', {
                     method: 'POST',
                     mode: 'cors',
                     credentials: 'omit',
