@@ -206,7 +206,7 @@ if ($resp->isSuccess()) {
         # Content
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
-        $mail->Subject = SUBJECT;
+        $mail->Subject = $title; // SUBJECT;
         $mail->Body    = $email_body;
         $mail->AltBody = strip_tags($email_body);
 
