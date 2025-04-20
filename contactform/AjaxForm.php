@@ -15,12 +15,30 @@ require __DIR__ . '/vendor/PHPMailer/PHPMailer.php';
 require __DIR__ . '/vendor/PHPMailer/SMTP.php';
 require __DIR__ . '/vendor/recaptcha/autoload.php';
 
+// 在常量定义区添加
+const ADMIN_EMAIL = 'markshou@gmail.com';
+const SECOND_EMAIL = 'yanyanli302@gmail.com';
+
 // Define the log file path
 define('LOG_FILE', __DIR__ . '/contact_form.log');
+define('BACKUP_LOG_FILE', __DIR__ . '/bak_contactform.log');
+define('MAX_LOG_SIZE', 1024 * 1024); // 1MB
 
 // Function to log messages
 function log_message($message) {
     $timestamp = date('Y/m/d H:i:s:u'); // Format: yyyy/mm/dd hh:mm:ss:ms
+
+    // ログサイズが上限を超えたらローテーション
+    if (file_exists(LOG_FILE) && filesize(LOG_FILE) >= MAX_LOG_SIZE) {
+        // 既にバックアップがあるなら削除
+        if (file_exists(BACKUP_LOG_FILE)) {
+            unlink(BACKUP_LOG_FILE);
+        }
+
+        // 現在のログをバックアップとしてリネーム
+        rename(LOG_FILE, BACKUP_LOG_FILE);
+    }
+
     error_log("[$timestamp] $message" . PHP_EOL, 3, LOG_FILE);
 }
 
@@ -93,10 +111,6 @@ const HANDLER_MSG = [
     '
 ];
 
-// 在常量定义区添加
-const ADMIN_EMAIL = 'markshou@gmail.com';
-const SECOND_EMAIL = 'yanyanli302@gmail.com';
-
 
 
 # Check if request is Ajax request
@@ -129,9 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 # Prepare email body
+$title ="web form: " . $name;
 $email_body = HANDLER_MSG['email_body'];
 $email_body = template($email_body, [
-    'subject' => SUBJECT,
+    'subject' => $title , //SUBJECT,
     'date'    => $date->format('y/m/j H:i:s'),
     'name'    => $name,
     'email'   => $email,
