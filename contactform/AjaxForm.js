@@ -37,6 +37,8 @@ onload = (event) => {
 
                 fetch('https://contactphp.ct.ws/AjaxForm.php', {
                     method: 'post',
+                    mode: 'cors', // 明确启用CORS模式
+                    credentials: 'omit', // 根据需求选择omit/same-origin/include
                     body: data
                 }).then((data) => {
                     console.log ("send data..." );
