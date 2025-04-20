@@ -35,7 +35,7 @@ onload = (event) => {
                 let data = new FormData(form);
                 let alertClass = 'alert-danger';
 
-                fetch('AjaxForm.php', {
+                fetch('https://contactphp.ct.ws/AjaxForm.php', {
                     method: 'post',
                     body: data
                 }).then((data) => {
