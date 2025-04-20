@@ -1,88 +1,142 @@
 /**
- * .checkValidity | https://getbootstrap.com/docs/5.3/forms/validation
- * FormData | https://developer.mozilla.org/en-US/docs/Web/API/FormData
- * fetch | https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
- * reCaptcha v3 | https://developers.google.com/recaptcha/docs/v3
- * 
- * @author Raspgot
+ * 表单提交处理及reCAPTCHA v3集成
+ * @see https://developers.google.com/recaptcha/docs/v3
  */
+const reCAPTCHA_SITE_KEY = '6LcvrBcrAAAAAFZ_zegpjQnud2i7Mn0_xjrnHeNq';
 
-const reCAPTCHA_site_key = '6LcvrBcrAAAAAFZ_zegpjQnud2i7Mn0_xjrnHeNq' // GOOGLE public key
+// 页面加载初始化
+document.addEventListener('DOMContentLoaded', () => {
+    initializeRecaptcha();
+    setupFormValidation();
+});
 
-onload = (event) => {
-    'use strict'
-
-    // Execute grecaptcha initialization
-    checkRecaptcha(event);
-
-    let forms   = document.querySelectorAll('.needs-validation');
-    let spinner = document.getElementById('loading-spinner');
-    let button  = document.querySelector('button[type="submit"]');
-
-    Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-            if (form.checkValidity() === true) {
-                event.preventDefault();
-                form.classList.remove('was-validated');
-                spinner.classList.remove('d-none');
-                button.disabled = true;
-
-                let data = new FormData(form);
-                let alertClass = 'alert-danger';
-
-                fetch('https://contactphp.ct.ws/AjaxForm.php', {
-                    method: 'post',
-                    mode: 'cors', // 明确启用CORS模式
-                    credentials: 'omit', // 根据需求选择omit/same-origin/include
-                    body: data
-                }).then((data) => {
-                    console.log ("send data..." );
-                    console.log (data);
-                    return data.text();
-                }).then((txt) => {
-                    txt = JSON.parse(txt);
-                    if (txt.error === false) {
-                        alertClass = 'alert-success';
-                    }
-                    let alertBox = '<div class="alert ' + alertClass + '">' + txt.message + '</div>';
-                    if (alertClass && txt) {
-                        form.querySelector('#alert-statut').insertAdjacentHTML('beforeend', alertBox);
-                        form.reset();
-                        checkRecaptcha(event);
-                    }
-                    spinner.classList.add('d-none');
-                    button.disabled = false;
-                    setTimeout(function () {
-                        form.querySelector('#alert-statut').innerHTML = '';
-                    }, 5000);
-                }).catch((err) => {
-                    console.log('Error encountered: ');
-                    console.log (err);
-                    spinner.classList.add('d-none');
-                    button.disabled = false;
-                });
-            }
-        }, false);
+// reCAPTCHA初始化
+function initializeRecaptcha() {
+    grecaptcha.ready(() => {
+        refreshRecaptchaToken();
     });
-};
+}
 
-/**
- * @link https://developers.google.com/recaptcha/docs/v3#programmatically_invoke_the_challenge
- */
-const checkRecaptcha = (event) => {
-    event.preventDefault();
+// 刷新reCAPTCHA token
+function refreshRecaptchaToken() {
+    grecaptcha.execute(reCAPTCHA_SITE_KEY, { action: 'submit' })
+        .then(token => {
+            document.querySelector('[name="recaptcha-token"]').value = token;
+        });
+}
 
-    grecaptcha.ready(function () {
-        grecaptcha.execute(reCAPTCHA_site_key, {
-            action: 'submit'
-        }).then(function (token) {
-            // Input with recaptcha-token name take the recaptcha token value
-            document.getElementsByName('recaptcha-token')[0].value = token;
+// 表单验证和提交配置
+function setupFormValidation() {
+    const forms = document.querySelectorAll('.needs-validation');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            // 表单验证状态检查
+            if (!form.checkValidity()) {
+                form.classList.add('was-validated');
+                return;
+            }
+
+            // 显示加载状态
+            const spinner = form.querySelector('.loading-spinner');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            showLoadingState(spinner, submitBtn);
+
+            try {
+                // 准备表单数据
+                const formData = new FormData(form);
+                
+                // 发送请求
+                const response = await fetch('https://contactphp.ct.ws/AjaxForm.php', {
+                    method: 'POST',
+                    mode: 'cors',
+                    credentials: 'omit',
+                    body: formData
+                });
+
+                // 处理响应
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                const result = await response.json();
+                handleResponse(form, result);
+
+            } catch (error) {
+                handleError(form, error);
+            } finally {
+                // 重置UI状态
+                hideLoadingState(spinner, submitBtn);
+                // 刷新reCAPTCHA token
+                refreshRecaptchaToken();
+            }
         });
     });
-};
+}
+
+// 显示加载状态
+function showLoadingState(spinner, button) {
+    spinner?.classList.remove('d-none');
+    button.disabled = true;
+}
+
+// 隐藏加载状态
+function hideLoadingState(spinner, button) {
+    spinner?.classList.add('d-none');
+    button.disabled = false;
+}
+
+// 处理成功响应
+function handleResponse(form, result) {
+    const alertContainer = form.querySelector('#alert-statut');
+    
+    // 清空旧消息
+    alertContainer.innerHTML = '';
+    
+    // 创建消息元素
+    const alert = document.createElement('div');
+    alert.className = `alert ${result.error ? 'alert-danger' : 'alert-success'}`;
+    alert.textContent = result.message;
+    
+    // 添加动效
+    alert.style.opacity = 0;
+    alertContainer.appendChild(alert);
+    setTimeout(() => alert.style.opacity = 1, 10);
+
+    // 成功时重置表单
+    if (!result.error) {
+        form.reset();
+        form.classList.remove('was-validated');
+    }
+
+    // 自动隐藏消息
+    setTimeout(() => {
+        alert.style.opacity = 0;
+        setTimeout(() => alert.remove(), 300);
+    }, 5000);
+}
+
+// 处理错误
+function handleError(form, error) {
+    console.error('Submission error:', error);
+    
+    const alertContainer = form.querySelector('#alert-statut');
+    alertContainer.innerHTML = `
+        <div class="alert alert-danger fade-in">
+            ${error.message || '网络请求失败，请稍后重试'}
+        </div>
+    `;
+}
+
+// 样式建议（添加到CSS文件）
+/*
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+*/
