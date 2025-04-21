@@ -29,17 +29,17 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Kaisei Learn & Travel",
-    "url": "https://kaiseilearntravel.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://kaiseilearntravel.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kaisei Learn & Travel",
+      "url": "https://kaiseilearntravel.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kaiseilearntravel.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
-  }
   </script>
 
   <!-- Preload critical resources -->
@@ -51,7 +51,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../logo/apple-touch-icon.png">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" media="print"
+    onload="this.media='all'">
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <link rel="stylesheet" href="../lib/animate/animate.min.css">
@@ -79,8 +80,10 @@
               </button>
               <ul class="language_bar_chooser" role="menu">
                 <li class="active" role="menuitem"><img src="../img/flags/en.png" alt="English" width="20" height="20"> English</li>
-                <li role="menuitem"><a rel="alternate" hreflang="ja" href="../ja/index.html"><img src="../img/flags/ja.png" alt="Japanese" width="20" height="20"> Japanese</a></li>
-                <li role="menuitem"><a rel="alternate" hreflang="zh" href="../zh/index.html"><img src="../img/flags/zh.png" alt="Simplified Chinese" width="20" height="20"> Simplified Chinese</a></li>
+                <li role="menuitem"><a rel="alternate" hreflang="ja" href="../ja/index.html"><img
+                      src="../img/flags/ja.png" alt="Japanese" width="20" height="20"> Japanese</a></li>
+                <li role="menuitem"><a rel="alternate" hreflang="zh" href="../zh/index.html"><img
+                      src="../img/flags/zh.png" alt="Simplified Chinese" width="20" height="20"> Simplified Chinese</a></li>
               </ul>
             </div>
           </div>
@@ -90,8 +93,9 @@
 
     <nav class="navbar navbar-expand-lg ftco-navbar-light stick-header" aria-label="Main Navigation">
       <div class="container-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Menu">
-          <span class="fa fa-bars"></span> Nav
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Menu">
+          <span class="fa fa-bars"></span> Menu
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -109,104 +113,49 @@
 
   <main class="main">
     <!-- service hero -->
-    <section class="py-1">
-      <div class="product-hero mt-1">
-        <img src="./images/oneleaf.jpg" alt="" class="block-w100 img img-fluid">
-      </div>
-    </section>
-
     <section class="ftco-section bg-white">
-      <div class="container">
-        <div class="row justify-content-end">
-          <div class="col-md-12">
-            <h2 class="mb-4 text-primary post-title">Why Homestay Services?</h2>
-            <div class="text">
-              <p class="mb-1">
-                Accommodation needs vary widely, but hotels often prioritize efficiency and provide standardized services. <br>
-                Homestays are not necessarily in competition with hotels. <br>
-                There is a growing demand for families and groups to travel freely, experience local life, and do laundry as they would at home. This is why homestay services exist.
-              </p>
-              <h3 class="mb-4 text-center text-primary post-title">Service Overview</h3>
-              <ul class="service-list is-centered">
-                <li class="__item">1. Homestay Operations</li>
-                <li class="__item">2. Homestay Consulting</li>
-                <li class="__item">3. Homestay Management Services</li>
-                <li class="__item">4. Ryokan Investment</li>
-                <li class="__item">5. Travel Support</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="container-xl">
+        <div class="row mx-3">
+          <div class="col-md-10 col-lg-10 box-center">
+            <!-- Form -->
+            <div class="shadow rounded p-5">
+              <form action="/contactform/AjaxForm.php" method="post" class="needs-validation" novalidate>
+                <!-- Alert status -->
+                <div id="alert-statut" class="alert-container"></div>
+                <div class="loading-spinner d-none"></div>
 
-        <div class="row justify-content-end">
-          <div class="col-md-12">
-            <div class="feature-block" id="dxplan1">
-              <h3 class="text-primary">1. Homestay Operations</h3>
-              <p>
-                We operate homestays in Tokyo. <br>
-                We provide accommodation services for families and groups of up to 10 people. <br>
-                Currently, we manage two properties, which have received positive feedback from many guests.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="img-box-a">
-              <a href="https://staydreamhotel.com/">
-                <img src="../images/staydream.jpg" alt="" class="img">
-              </a>
-              <p class="text-center">Stay Dream Hotel</p>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="img-box-a">
-              <a href="https://flowerteahotel.com/">
-                <img src="../images/build_1.jpg" alt="" class="img">
-              </a>
-              <p class="text-center">Flower Tea Hotel</p>
-            </div>
-          </div>
-        </div>
+                <!-- Inputs -->
+                <div class="mb-3">
+                  <label for="name" class="form-label fs-5">Name</label>
+                  <input type="text" class="form-control" name="name" required>
+                  <div class="valid-feedback">Name looks good</div>
+                  <div class="invalid-feedback">Please provide a valid name</div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label fs-5">Email</label>
+                  <input type="email" class="form-control" name="email" aria-describedby="emailHelp" required>
+                  <div id="emailHelp" class="form-text">Make sure to provide a valid email</div>
+                  <div class="valid-feedback">Email looks good</div>
+                  <div class="invalid-feedback">Please provide a valid email</div>
+                </div>
+                <div class="mb-4">
+                  <label for="message" class="form-label fs-5">Message</label>
+                  <textarea class="form-control" name="message" rows="4" required></textarea>
+                  <div class="valid-feedback">The message looks good</div>
+                  <div class="invalid-feedback">Please provide a valid message</div>
+                </div>
 
-        <div class="row justify-content-end">
-          <div class="col-md-12">
-            <div class="feature-block" id="dxplan2">
-              <h3 class="text-primary">2. Homestay Consulting</h3>
-              <p>
-                As we operate homestays, we can share all the challenges we’ve faced firsthand. <br>
-                We provide comprehensive support for those interested in homestay investment. <br>
-                From property acquisition to operations, we support every step of the process.
-              </p>
-            </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary px-5">
+                  <div class="spinner-grow spinner-grow-sm me-2 d-none" id="loading-spinner" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <span>SEND</span>
+                </button>
 
-            <div class="feature-block" id="dxplan2">
-              <h3 class="text-primary">3. Homestay Management Services</h3>
-              <p>
-                Managing a homestay is not easy—it requires significant time, effort, and language skills to handle international guests. <br>
-                We offer the following management services:
-              </p>
-              <ul>
-                <li>(1) Assistance with obtaining homestay permits</li>
-                <li>(2) Web registration and guest communication</li>
-                <li>(3) Cleaning and pre-check-in preparations</li>
-                <li>(4) Provision of equipment and linens</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="row justify-content-end">
-          <div class="col-md-12">
-            <div class="feature-block" id="dxplan2">
-              <h3 class="text-primary">4. Management of Traditional Houses or Vacation Homes</h3>
-              <p>
-                Properly managing unused traditional houses or vacation homes can generate income for owners. <br>
-                Having people stay in these properties brings back their original vibrancy, creating a positive impact.
-              </p>
-              <ul>
-                <li>(1) Revitalization and operation of vacant homes</li>
-                <li>(2) Management of traditional houses</li>
-                <li>(3) Management of vacation homes</li>
-              </ul>
+                <!-- IMPORTANT | Token value recaptcha -->
+                <input name="recaptcha-token" type="hidden">
+              </form>
             </div>
           </div>
         </div>
@@ -318,5 +267,9 @@
 
   <!-- Template Main Javascript File -->
   <script src="../js/main.js"></script>
+
+  <!-- contact form -->
+  <script defer src="https://www.google.com/recaptcha/api.js?render=6LcvrBcrAAAAAFZ_zegpjQnud2i7Mn0_xjrnHeNq"></script>
+  <script src="../contactform/AjaxForm.js"></script>
 </body>
 </html>
