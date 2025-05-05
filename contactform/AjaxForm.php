@@ -152,6 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 # Prepare email body
+$company_field = $company ? '<p><b>Company</b>: {{company}}</p>' : '';
 $title ="web form: " . $name;
 $email_body = HANDLER_MSG['email_body'];
 $email_body = template($email_body, [
