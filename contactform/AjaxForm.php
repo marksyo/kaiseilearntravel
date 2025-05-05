@@ -95,6 +95,7 @@ const SUBJECT     = 'New message from Kaisei web form!';
 const HANDLER_MSG = [
     'success'       => '✔️ Your message has been sent !',
     'token-error'   => '❌ Error recaptcha token.',
+    'enter_company' => '❌ Please enter your company name.',
     'enter_name'    => '❌ Please enter your name.',
     'enter_email'   => '❌ Please enter a valid email.',
     'enter_message' => '❌ Please enter your message.',
@@ -103,6 +104,7 @@ const HANDLER_MSG = [
     'email_body'    => '
         <h1>{{subject}}</h1>
         <p><b>Date</b>: {{date}}</p>
+          {{company_field}}
         <p><b>Name</b>: {{name}}</p>
         <p><b>E-Mail</b>: {{email}}</p>
         <p><b>Message</b>: {{message}}</p>
@@ -126,6 +128,11 @@ $ip = $_SERVER['HTTP_X_FORWARDED_FOR']
 # Check if fields has been entered and valid
 $date    = new DateTime();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $company = isset($_POST['company']) ? secure($_POST['company']) : '';
+    if ($company === '' && isset($_POST['company'])) {
+        statusHandler(true, HANDLER_MSG['enter_company']);
+    }
+
     $name    = secure($_POST['name']) ?? statusHandler(true, HANDLER_MSG['enter_name']);
     $email   = filter_var(secure($_POST['email']), FILTER_SANITIZE_EMAIL) ?? statusHandler(true, HANDLER_MSG['enter_email']);
     $message = secure($_POST['message']) ?? statusHandler(true, HANDLER_MSG['enter_message']);
@@ -148,6 +155,8 @@ $email_body = HANDLER_MSG['email_body'];
 $email_body = template($email_body, [
     'subject' => $title , //SUBJECT,
     'date'    => $date->format('y/m/j H:i:s'),
+    'company_field' => $company_field,
+    'company'       => $company,
     'name'    => $name,
     'email'   => $email,
     'ip'      => filter_var($ip, FILTER_VALIDATE_IP),
