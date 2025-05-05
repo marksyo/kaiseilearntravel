@@ -46,7 +46,9 @@ function log_message($message) {
 // 允许的前端域名列表
 $allowedOrigins = [
     'https://kaiseilearntravel.onrender.com',
-    'http://localhost:3000' // 本地开发环境
+    'http://localhost:3000', // 本地开发环境
+    'https://izumosoan.com',  // Added to allow requests from izumosoan.com
+    'https://kaiseilearntravel.com'  // Added to allow requests from izumosoan.com
 ];
 
 // 获取请求来源
