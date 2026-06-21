@@ -1,0 +1,3 @@
+# dot folders (system/config) - exclude all from git
+.*/
+!.gitignore
