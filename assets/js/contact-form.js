@@ -1,1 +1,48 @@
-document.addEventListener("DOMContentLoaded",function(){emailjs.init("43OQ_Ry644Q3c0bdc");var form=document.getElementById("contact-form"),msg=document.getElementById("form-message");form.addEventListener("submit",function(e){e.preventDefault();msg.className="text-sm font-bold text-slate-500";msg.textContent=msg.dataset.sending;emailjs.sendForm("service_kaisei","template_x5lnw6m",this).then(function(){msg.className="text-sm font-bold text-emerald-600";msg.textContent=msg.dataset.success;form.reset()},function(){msg.className="text-sm font-bold text-red-600";msg.textContent=msg.dataset.error})})});
+document.addEventListener('DOMContentLoaded', function () {
+    var e = document.getElementById('contact-form');
+    if (e) {
+        e.addEventListener('submit', async function (t) {
+            t.preventDefault();
+            var n = e.querySelector('button[type="submit"]'),
+                o = document.getElementById('form-message'),
+                r = n.innerHTML;
+            n.innerHTML = 'Sending...';
+            n.disabled = !0;
+            o.className = 'text-sm font-bold text-slate-500';
+            o.textContent = o.dataset.sending;
+            var i = new FormData(e),
+                a = i.get('email') || '',
+                s = {
+                    site: 'Kaisei Learn Travel',
+                    form: 'contact',
+                    replyTo: a,
+                    data: {
+                        'お名前': i.get('name') || '',
+                        'メール': a,
+                        'カテゴリー': i.get('category') || '',
+                        'お問い合わせ内容': i.get('message') || ''
+                    }
+                };
+            try {
+                var d = await fetch('https://api.yasashiikaikei.com/api/v1/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(s)
+                });
+                if (d.ok) {
+                    var l = await d.json();
+                    o.className = 'text-sm font-bold text-emerald-600';
+                    o.textContent = o.dataset.success;
+                    e.reset()
+                } else throw new Error('API request failed')
+            } catch (u) {
+                o.className = 'text-sm font-bold text-red-600';
+                o.textContent = o.dataset.error
+            }
+            n.innerHTML = r;
+            n.disabled = !1
+        })
+    }
+});

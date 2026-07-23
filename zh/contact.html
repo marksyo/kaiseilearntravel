@@ -47,7 +47,44 @@
 }
     </script>
   
-</head>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "開誠文旅株式会社",
+  "alternateName": "Kaisei Learn Travel",
+  "url": "https://kaiseilearntravel.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://kaiseilearntravel.com/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://kaiseilearntravel.com/zh/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "联系我们",
+      "item": "https://kaiseilearntravel.com/zh/contact.html"
+    }
+  ]
+}
+    </script>
+  </head>
 <body>
   <div class="site-shell">
     <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -64,7 +101,7 @@
 </header>
     <main class="flex-1"><section class="page-hero py-24 text-white" style="--page-image: url('../assets/img/contact.jpg')"><div class="mx-auto max-w-7xl px-5 lg:px-8"><p class="text-sm font-extrabold uppercase tracking-[0.18em] text-amber-300">Contact</p><h1 class="mt-4 text-4xl font-extrabold sm:text-5xl">联系我们</h1><p class="mt-6 max-w-3xl text-lg leading-8 text-slate-100">欢迎咨询住宿、不动产、日本市场进入相关事项。确认内容后，我们将尽快联系您。</p></div></section><section class="bg-white py-20"><div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.85fr_1.15fr] lg:px-8"><div><p class="section-label">Consultation</p><h2 class="mt-3 text-3xl font-extrabold text-slate-900">咨询类别</h2><div class="gold-line mt-5"></div><div class="mt-8 grid gap-4"><div class="stat"><h3 class="font-extrabold text-slate-900">住宿</h3></div><div class="stat"><h3 class="font-extrabold text-slate-900">不动产</h3></div><div class="stat"><h3 class="font-extrabold text-slate-900">日本市场进入</h3></div></div></div><form class="card grid gap-5 p-7" id="contact-form" action="#" method="post"><div class="grid gap-5 sm:grid-cols-2"><label class="grid gap-2 text-sm font-bold text-slate-700">姓名<input class="form-field" name="name" autocomplete="name" required></label><label class="grid gap-2 text-sm font-bold text-slate-700">公司名<input class="form-field" name="company" autocomplete="organization"></label></div><div class="grid gap-5 sm:grid-cols-2"><label class="grid gap-2 text-sm font-bold text-slate-700">邮箱<input class="form-field" type="email" name="email" autocomplete="email" required></label><label class="grid gap-2 text-sm font-bold text-slate-700">国家/地区<input class="form-field" name="country" autocomplete="country-name"></label></div><label class="grid gap-2 text-sm font-bold text-slate-700">咨询类别<select class="form-field" name="category"><option>住宿</option><option>教育</option><option>不动产</option><option>日本市场进入</option><option>其他</option></select></label><label class="grid gap-2 text-sm font-bold text-slate-700">咨询内容<textarea class="form-field min-h-36" name="message" required></textarea></label><p class="text-sm text-slate-500">※通常1-2个工作日内回复。如未收到回复，请再次联系我们。</p><div id="form-message" class="text-sm font-bold" data-sending="发送中..." data-success="已发送。我们将尽快与您联系。" data-error="发送失败。请重试。"></div><button class="btn-primary w-full sm:w-auto" type="submit">提交咨询</button></form></div></section></main>
     <footer class="site-footer">
-  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[1.15fr_0.85fr_1fr] lg:px-8">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-12 lg:grid-cols-[1.15fr_0.85fr_1fr_1fr] lg:px-8">
     <div>
       <img class="footer-logo" src="../assets/img/logo/big_logo.jpg" alt="开诚文旅株式会社">
       <p class="mt-5 max-w-sm text-sm leading-7 text-slate-300">连接住宿、不动产与日本市场进入的合作伙伴</p>
@@ -77,6 +114,16 @@
     <div>
       <h2>服务信息</h2>
       <ul class="footer-service-links"><li><a href="hospitality.html"><span>Hospitality</span>住宿事业支援</a></li><li><a href="investment.html"><span>Investment</span>面向外国人的投资支援</a></li><li><a href="market-entry.html"><span>Market Entry</span>中国企业日本市场进入支援</a></li></ul>
+    </div>
+    <div>
+      <h2>产品</h2>
+      <ul class="footer-service-links">
+        <li>
+          <a href="https://yasashiikaikei.com/" target="_blank" rel="noopener noreferrer">
+            <span>やさしい会計</span> 不懂簿记，今天就能用。
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="border-t border-white/10">
